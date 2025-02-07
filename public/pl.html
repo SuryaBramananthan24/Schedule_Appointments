@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Login - Appointment Booking</title>
+    <link rel="stylesheet" href="./Css/pl.css">
+</head>
+<body>
+
+    <header>
+        <h1>Login to Your Account</h1>
+    </header>
+    <div class="form-container">
+        <h2>Professor Login</h2>
+        <form action="/pl">
+            <input type="email" name="email" placeholder="Email" id="email" required>
+            <input type="password" name="password" placeholder="Password" id="password"required>
+            <button type="submit" onclick ="event.preventDefault(); Gpn()"class="login-btn">Login</button>
+        </form>
+
+        <div class="sign-up-link">
+            <p>Don't have an account? <a href="/ps">Sign up here</a>.</p>
+        </div>
+		<div class="sign-up-link">
+            <p>Student? <a href="/ss">Signup here</a>.</p>
+        </div>
+    </div>
+<script>
+	function Gpn(){
+		let email = document.getElementById('email').value;
+		let password = document.getElementById('password').value;
+		console.log(email,password);
+		fetch('/gpn',{
+			method : "POST",
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			body : JSON.stringify({ email:email, password:password}),
+		})
+		.then(res => res.json())
+		.then(data => {
+			if(data.success){
+				let Professor_Name = data.Professor_Name;
+				console.log(Professor_Name);
+				localStorage.setItem('Professor_Name',Professor_Name);
+				console.log(data.message);
+				window.location.href = "/pd";
+			}
+			else { alert("Login failed! Check your credentials");}
+		})
+		.catch(err =>{
+			console.log(err);
+		})
+	}
+</script>
+</body>
+</html>

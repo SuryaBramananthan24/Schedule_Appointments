@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studen Login - Appointment Booking</title>
+    <link rel="stylesheet" href="sl.css">
+</head>
+<body>
+
+    <header>
+        <h1>Login to Your Account</h1>
+    </header>
+    <div class="form-container">
+        <h2>Student Login</h2>
+		<form action="/sl">
+			<input type="text" name="email" placeholder="E-mail" id="email" required>
+			<input type="password" name="password" placeholder="Password" id="password" required>
+			<button class="login-btn" onclick="event.preventDefault(); Gsn()" type="submit">Login</button>
+        </form>
+		<div class="sign-up-link">
+            <p>Don't have an account? <a href="/ss">Sign up here</a>.</p>
+        </div>
+		<div class="sign-up-link">
+            <p>Professor? <a href="/ps">Sign up here</a>.</p>
+        </div>
+    </div>
+<script>
+	function Gsn(){
+		let email = document.getElementById('email').value;
+		let password = document.getElementById('password').value;
+		console.log(email,password);
+		fetch('/gsn',{
+			method : "POST",
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			body : JSON.stringify({ email : email, password:password}),
+		})
+		.then(res => res.json())
+		.then(data => {
+			if(data.success){
+				let Student_Name = data.Student_Name;
+				console.log(Student_Name);
+				localStorage.setItem('Student_Name',Student_Name);
+				window.location.href = "/sd";
+			}
+			else { console.log(data.message);}
+		})
+		.catch(err =>{
+			console.log(err);
+		})
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Appointment Booking</title>
+    <link rel="stylesheet" href="./Css/sd.css">
+</head>
+<body>
+
+    <header id="head"></header>
+	<form action="/sd">
+    <div class="dashboard-container">
+        <h2>Available Professors</h2>
+        <div class="professors"></div>
+    </div>
+	<center>
+		<button type="submit" class="upd-btn" onclick="event.preventDefault();window.location.href='/sl'">Back</button>
+		<button type="submit" class="upd-btn" onclick="event.preventDefault();window.location.href='/ma'">My Appointments</button>
+	</center>
+	</form>
+<script>
+function addProf(fullname,time) {
+	let Student_Name = localStorage.getItem('Student_Name');
+	console.log(Student_Name);
+	console.log("Sending data:", { Professor_Name: fullname,Student_Name : Student_Name ,Time: time }); 
+    fetch('/apd', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ Professor_Name: fullname,Student_Name : Student_Name , Time: time }),
+    })
+    .then(() => alert("Appointment Booked!"))
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+window.onload = () => {
+    fetch('/gsd')
+        .then(res => res.json())  
+        .then(data => {
+            let container = document.getElementsByClassName('professors')[0];
+            container.innerHTML = '';
+            data.forEach(prof => {
+                let new_div = document.createElement('div');
+                new_div.innerHTML = `<div class="professor-item">
+                    <h4>Professor: ${prof.fullname}&nbsp;&nbsp;&nbsp;&nbsp;Available Timings: ${prof.time1}</h4>					
+                    <div class="btn-container">
+                        <button class="add-btn" onclick="addProf('${prof.fullname}','${prof.time1}')">Add Appointment</button>
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;	
+					<h4>Professor: ${prof.fullname}&nbsp;&nbsp;&nbsp;&nbsp;Available Timings: ${prof.time2}</h4>
+					<div class="btn-container">
+                        <button class="add-btn" onclick="addProf('${prof.fullname}','${prof.time2}')">Add Appointment</button>
+                    </div>
+				</div>`;
+                container.appendChild(new_div);
+            });
+        })
+        .catch(err => {
+            console.error('Fetch error:', err);
+        });		
+};
+</script>
+</body>
+</html>

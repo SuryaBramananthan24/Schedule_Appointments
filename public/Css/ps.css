@@ -1,0 +1,80 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #6495ED;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            font-size: 1.1em;
+        }
+	
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #6495ED;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .signup-btn {
+            background-color: #6495ED;
+            color: white;
+            padding: 12px;
+            font-size: 1.1em;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .signup-btn:hover {
+            background-color: skyblue;
+        }
+
+        .login-link {
+            text-align: center;
+            
+        }
+
+        .login-link a {
+            text-decoration: none;
+            color: #6495ED;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }

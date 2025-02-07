@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Appointments</title>
+    <link rel="stylesheet" href="./Css/ma.css">
+</head>
+<body>
+
+    <header>
+        <h1>Student DashBoard</h1>
+    </header>
+   <form action="/ma">
+    <div class="dashboard-container">
+        <h2>Professor Appointments</h2>
+        <div class="professors"></div></div>
+	<center>
+		<button type="submit" class="back-btn" onclick="event.preventDefault();window.location.href='/sd'">Back</button>	
+	</center>
+   </form>
+<script>
+function CSA(Professor_Name){
+	fetch(`/csa?Professor_Name=${Professor_Name}`,
+	{
+		method : "DELETE",
+		headers :{
+			'Content-Type' : 'application/json',
+		},
+		body : JSON.stringify({Professor_Name : Professor_Name}),
+	})
+	.then(() => {
+		console.log("Appointment Cancelled")
+		})
+	.catch(err => console.error(err));
+}
+window.onload = () => {
+	let Student_Name = localStorage.getItem('Student_Name');
+	console.log(Student_Name)
+	fetch(`/gsn?Student_Name=${encodeURIComponent(Student_Name)}`)
+		.then(res => res.json())
+		.then(data =>{
+			let container = document.getElementsByClassName('professors')[0];
+			container.innerHTML = '';
+			data.forEach(stud =>{
+				let new_div = document.createElement('div');
+				new_div.innerHTML = `<div class="appointment-item">Professor Name : ${stud.Professor_Name}&nbsp;&nbsp;&nbsp;&nbsp;Time : ${stud.Time}</div>
+				<div class="btn-container">
+					<button class="approve-btn">Approve Appointment</button>
+					<button class="delete-btn" onclick="CSA('${stud.Professor_Name}')">Cancel Appointment</button>
+				</div>`;
+				container.appendChild(new_div);
+			})
+		})
+		.catch(err =>{
+			console.log(err);
+		});
+};    
+</script>
+</body>
+</html>

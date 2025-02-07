@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Sign Up - Appointment Booking</title>
+    <link rel="stylesheet" href="./Css/ss.css">
+    <header>
+        <h1>Create an Account</h1>
+    </header>
+    <div class="form-container">
+        <h2>Student Sign Up</h2>        
+		<form action="/ss" method="POST">			
+		   <input type="text" name="fullname" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button class="signup-btn">Sign Up</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="/sl">Login here</a>.</p>
+        </div>
+		<div class="login-link">
+            <p>Professor? <a href="/pl">Login here</a>.</p>
+        </div>
+    </div>
+	</form>
+</body>
+</html>

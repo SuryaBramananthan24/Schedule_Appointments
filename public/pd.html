@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Dashboard - Appointment Booking</title>
+    <link rel="stylesheet" href="./Css/pd.css">
+</head>
+<body>
+
+    <header>
+        <h1>Professor Dashboard</h1>
+    </header>
+   <form action="/pd">
+    <div class="dashboard-container">
+        <h2>Student Appointments</h2>
+        <form action="/pd">
+        <div class="students"></div></div>
+	<center>
+		<button type="submit" class="back-btn" onclick="event.preventDefault();window.location.href='/pl'">Back</button>
+	</center>
+   </form>
+<script>
+function CA(Student_Name){
+	fetch(`/dsa?Student_Name=${Student_Name}`,
+	{
+		method : "DELETE",
+		headers :{
+			'Content-Type' : 'application/json',
+		},
+		body : JSON.stringify({Student_Name : Student_Name}),
+	})
+	.then(() => {
+		alert("Appointment Cancelled");
+		})
+	.catch(err => console.error(err));
+}
+window.onload = () => {
+	let Professor_Name = localStorage.getItem('Professor_Name');
+	console.log(Professor_Name)
+	fetch(`/gpn?Professor_Name=${encodeURIComponent(Professor_Name)}`)
+		.then(res => res.json())
+		.then(data =>{
+			let container = document.getElementsByClassName('students')[0];
+			container.innerHTML = '';
+			data.forEach(stud =>{
+				let new_div = document.createElement('div');
+				new_div.innerHTML = `<div class="appointment-item">Student Name : ${stud.Student_Name}&nbsp;&nbsp;&nbsp;&nbsp;Time : ${stud.Time}</div>
+				<div class="btn-container">
+					<button class="approve-btn">Approve Appointment</button>
+					<button class="delete-btn" onclick="CA('${stud.Student_Name}')">Cancel Appointment</button>
+				</div>`;
+				container.appendChild(new_div);
+			})
+		})
+		.catch(err =>{
+			console.log(err);
+		});
+};    
+</script>
+</body>
+</html>

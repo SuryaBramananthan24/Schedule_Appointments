@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    }
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    }
+.hero-section {
+    background-color:skyblue;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    }
+.hero-section h1 {
+    font-size: 3em;
+    margin: 0;
+    }
+.hero-section p {
+    font-size: 1.5em;
+    margin: 10px 0;
+    }
+.quote {
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 1.2em;
+    }
+.get-started-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+    }
+.get-started-btn:hover {
+    background-color: #e64a19;
+    }
