@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(express.static('public'));
 
-mongoose.connect('mongodb+srv://Surya:Mongodbsurya%40123@database.ivw86.mongodb.net/?retryWrites=true&w=majority&appName=Database');
+mongoose.connect('<YourMongoDBURL>');
 mongoose.connection.on('open',()=>{console.log('Connected To MongoDB');});
 
 app.get('/',(req,res)=>{
